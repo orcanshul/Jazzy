@@ -1,26 +1,23 @@
-# Ubuntu
 FROM ubuntu:22.04
 
 ENV DEBIAN_FRONTEND=noninteractive
 
-# Install system dependencies, FFmpeg, and Liquidsoap
+# Install core networking binaries, FFmpeg toolkit, and Liquidsoap audio engine
 RUN apt-get update && apt-get install -y \
     curl \
     ffmpeg \
     liquidsoap \
     && rm -rf /var/lib/apt/lists/*
 
-#  Create a workspace directory within render / huggingface
 WORKDIR /workspace
 
-# Copy 
+# Pull codebase structure into container workspace
 COPY . .
 
-# perms required to run
+# Adjust user execution access bounds
 RUN chmod +x /workspace/worker.sh
 
-# port
 EXPOSE 8080
 
-# Liquidsoap gateway
+# Gateway startup defaults (Workers will override this signature dynamically)
 CMD ["liquidsoap", "/workspace/gateway.liq"]

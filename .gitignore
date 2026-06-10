@@ -1,16 +1,18 @@
-# Local Environment Configuration (CRITICAL)
+# Platform Secrets
 .env
 *.env
-secrets.json
+credentials.json
+secrets-*.txt
 
-# Media Files & Assets (Keep out of GitHub to prevent repository bloat)
-music/*.mp3
+# Media 
+music/
+*.mp3
 *.mp4
-*.m4a
 *.wav
+*.mov
 
-# System, Logs & Dependencies
-node_modules/
+# Compute Cache 
+.DS_Store
 __pycache__/
 *.log
-.DS_Store
+.build/
